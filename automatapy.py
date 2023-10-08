@@ -6,7 +6,8 @@ def isValidSql(str):
     BlackList = ['WHERE','FROM','SELECT','JOIN',
                  'INNER','FULL','AND','OR','NOT',
                  'LIKE','DELETE','DROP','DELETE',
-                 'CREATE','UPDATE','ALTER']
+                 'CREATE','UPDATE','ALTER','IN',
+                 'BETWEEN']
     
     #String de negación para las palabras reservadas de SQL
     BlackString = "("+"\W)|(".join(BlackList)+"\W)"
