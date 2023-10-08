@@ -9,17 +9,24 @@ class App(tk.Frame):
     def __init__(self, master):
         #widgets
         super().__init__(master)
-        self.lblInstruccion = tk.Label(text="Ingrese su consulta SQL:",font=('Consolas',12,'bold'))
-        self.lblMensaje = tk.Label(text=MENSAJE_LABEL,justify='left',font=('Consolas',8,'italic'))#<---NUEVO
-        self.txtConsultaSQL = tk.Text(height=7,width=40,font=('Consolas',12,''))
-        self.btnComprobar = tk.Button(text="VERIFICAR")
-        self.lblResultado = tk.Label(text="")
+        self.lblInstruccion = tk.Label(text="Ingrese su consulta SQL:",
+                                       font=('Consolas',12,'bold'))
+        self.lblMensaje = tk.Label(text=MENSAJE_LABEL,justify='left',
+                                   font=('Consolas',8,''),
+                                   fg='gray')
+        self.txtConsultaSQL = tk.Text(height=7,width=40,
+                                      font=('Consolas',12,''))
+        self.btnComprobar = tk.Button(text="VERIFICAR",
+                                      font=('Consolas',16,'bold'))
+        self.lblResultado = tk.Label(text="(resultado...)",
+                                     font=('Consolas',12,'bold'))
         
         self.lblInstruccion.pack(pady=5)
         self.lblMensaje.pack(pady=5)
-        self.txtConsultaSQL.pack(padx=20,fill='x')
-        self.btnComprobar.pack(padx=10,pady=10)
+        self.txtConsultaSQL.pack(padx=20,fill='both')
+        self.btnComprobar.pack(padx=10,pady=10,fill='x')
         self.lblResultado.pack()
+        
         self.config(padx=400,pady=400)
         self.pack()
 
@@ -35,6 +42,7 @@ class App(tk.Frame):
                             
 root = tk.Tk()
 root.title('AUTOMATA-SELECT-SQL')
+
 myapp = App(root)
 myapp.mainloop()
 
