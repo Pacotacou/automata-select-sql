@@ -10,7 +10,7 @@ def isValidSql(str):
     TABLE = f'({RES}([A-Z](\_?([A-Z]|\d))*))'
     ATRIB = f'(({TABLE}(\.{TABLE})?))'
     VALUE = '((\d+(\.\d+)?)|(\'.*\'))'
-    OP = '(\+|\-|\*|\/|\%|(\sAND\s)|(\sOR\s)|(\<\=?)|(\>\=?)|(\=\=)|(\sLIKE\s))'
+    OP = '(\+|\-|\*|\/|\%|(\sAND\s)|(\sOR\s)|(\<\=?)|(\>\=?)|(\=\=)|(\!\=)|(\sLIKE\s))'
 
     #ATRIBVAL = f'({ATRIB}|{VALUE})'
     ATRIBVAL =  f'((\s*NOT\s+)*({ATRIB}|{VALUE}))'

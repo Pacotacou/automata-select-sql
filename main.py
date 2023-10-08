@@ -26,8 +26,6 @@ class App(tk.Frame):
         self.txtConsultaSQL.pack(padx=20,fill='both')
         self.btnComprobar.pack(padx=10,pady=10,fill='x')
         self.lblResultado.pack()
-        
-        self.config(padx=400,pady=400)
         self.pack()
 
         #eventos
