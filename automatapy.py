@@ -11,7 +11,10 @@ def isValidSql(str):
     
     #String de negación para las palabras reservadas de SQL
     BlackString = "("+"\W)|(".join(BlackList)+"\W)"
+
+    #Expresión regular con las palabras reservadas SQL
     RES = f'(?!{BlackString})'
+
     #Variables
     TABLE = f'({RES}([A-Z](\_?([A-Z]|\d))*))'
     ATRIB = f'(({TABLE}(\.{TABLE})?))'
