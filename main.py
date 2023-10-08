@@ -17,7 +17,7 @@ BTN_BORRAR = 'BORRAR CONSULTA'
 BTN_COMPROBAR = 'COMPROBAR CONSULTA'
 
 TITULO  = "VERIFICADOR DE \n"
-TITULO +="CONSULTAS SQL"
+TITULO +="CONSULTAS SQL SIMPLES"
 
 FONT = "Impact Regular"
 INPUT_FONT="Roman Regular"
@@ -27,16 +27,18 @@ ICONOS1 = "Webdings"
 
 class App(tk.Frame):
     def __init__(self, master):
-        #widgets
+        #WIDGETS Y CONFIGURACIÓN 
         super().__init__(master)
         self.ContainerBtn = tk.Frame(self,relief='raised')
         self.lblInstruccion = tk.Label(text=TITULO,relief='flat',
-                                    font=(FONT_TITULO,24,'bold '))
-        self.lblMensaje = tk.Label(text=MENSAJE_EXCEPCIONES,justify='left',
+                                    font=(FONT_TITULO,20,'bold '))
+        self.lblMensaje = tk.Label(text=MENSAJE_EXCEPCIONES,
+                                    justify='left',
                                     font=(FONT,8,''),
                                     fg='gray')
         self.lblVerificar = tk.Label(self.ContainerBtn,
-                                    text=BTN_COMPROBAR,justify='center',
+                                    text=BTN_COMPROBAR,
+                                    justify='center',
                                     font=(FONT,8,'bold'),
                                     fg='gray')
         self.lblBorrar = tk.Label(self.ContainerBtn,
@@ -60,6 +62,7 @@ class App(tk.Frame):
                                     font=(FONT,12,'bold'),
                                     fg='gray')
         
+        #COLOCACIÓN DE LOS WIDGETS
         self.lblInstruccion.pack(pady=5)
         self.lblMensaje.pack(pady=5,fill='x')
         self.txtConsultaSQL.pack(padx=20,fill='both')
@@ -71,11 +74,11 @@ class App(tk.Frame):
         self.lblResultado.pack(pady=5)
         self.pack()
 
-        #eventos
+        #EVENTOS
         self.btnComprobar.bind('<Button-1>',self.btnComprobarClic)
         self.btnBorrar.bind('<Button-1>',self.btnBorrarClic)
     
-    #funciones
+    #FUNCIONES
     def btnBorrarClic(self,event):
         self.txtConsultaSQL.delete("1.0","end")
         self.lblResultado.config(text=MENSAJE_EMPTY,
@@ -97,7 +100,7 @@ class App(tk.Frame):
             self.lblResultado.config(text=MENSAJE_INVALIDO,
                                      fg='red')
 
-                            
+#PROCESO PRINCIPAL             
 root = tk.Tk()
 root.title('AUTOMATA-SELECT-SQL')
 root.resizable(False,False)
