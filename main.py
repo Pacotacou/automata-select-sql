@@ -2,16 +2,19 @@ import tkinter as tk
 from automatapy import isValidSql
 import re
 
-MENSAJE_LABEL ='-La sentencia FROM es obligatoria\n'
-MENSAJE_LABEL+='-No se contemplan SUBCONSULTAS\n'
-MENSAJE_LABEL+='-No se contemplan RELACIONES AVANZADAS (JOIN)\n'
-MENSAJE_LABEL+='-No se contemplan operaciones con PARÉNTESIS\n'
-MENSAJE_LABEL+="-Los string se escriben con comillas simples (')\n"
-MENSAJE_LABEL+="-No se permiten nombres de columna"
+MENSAJE_EXCEPCIONES ='-La sentencia FROM es obligatoria\n'
+MENSAJE_EXCEPCIONES+='-No se contemplan SUBCONSULTAS\n'
+MENSAJE_EXCEPCIONES+='-No se contemplan RELACIONES AVANZADAS (JOIN)\n'
+MENSAJE_EXCEPCIONES+='-No se contemplan operaciones con PARÉNTESIS\n'
+MENSAJE_EXCEPCIONES+="-Los string se escriben con comillas simples (')\n"
+MENSAJE_EXCEPCIONES+="-No se permiten nombres de columna"
 
 MENSAJE_EMPTY="INGRESE SU CONSULTA SQL"
 MENSAJE_VALIDO="LA CONSULTA SQL ES VÁLIDA"
 MENSAJE_INVALIDO="LA CONSULTA SQL NO ES VÁLIDA"
+
+BTN_BORRAR = 'BORRAR CONSULTA'
+BTN_COMPROBAR = 'COMPROBAR CONSULTA'
 
 TITULO  = "VERIFICADOR DE \n"
 TITULO +="CONSULTAS SQL"
@@ -28,34 +31,34 @@ class App(tk.Frame):
         super().__init__(master)
         self.ContainerBtn = tk.Frame(self,relief='raised')
         self.lblInstruccion = tk.Label(text=TITULO,relief='flat',
-                                       font=(FONT_TITULO,24,'bold '))
-        self.lblMensaje = tk.Label(text=MENSAJE_LABEL,justify='left',
-                                   font=(FONT,8,''),
-                                   fg='gray')
+                                    font=(FONT_TITULO,24,'bold '))
+        self.lblMensaje = tk.Label(text=MENSAJE_EXCEPCIONES,justify='left',
+                                    font=(FONT,8,''),
+                                    fg='gray')
         self.lblVerificar = tk.Label(self.ContainerBtn,
-                                     text='COMPROBAR',justify='center',
-                                   font=(FONT,8,'bold'),
-                                   fg='gray')
+                                    text=BTN_COMPROBAR,justify='center',
+                                    font=(FONT,8,'bold'),
+                                    fg='gray')
         self.lblBorrar = tk.Label(self.ContainerBtn,
-                                  text='BORRAR',justify='center',
-                                   font=(FONT,8,'bold'),
-                                   fg='gray')
+                                    text=BTN_BORRAR,justify='center',
+                                    font=(FONT,8,'bold'),
+                                    fg='gray')
         self.txtConsultaSQL = tk.Text(height=7,width=50,
-                                      font=(INPUT_FONT,10,''),
-                                      fg='black')
+                                    font=(INPUT_FONT,10,''),
+                                    fg='black')
         self.btnComprobar = tk.Button(self.ContainerBtn,text="8",
-                                      font=(ICONOS1,20,''),
-                                      width=5,
-                                      fg='white',
-                                      background='#0BE462')
+                                    font=(ICONOS1,20,''),
+                                    width=5,
+                                    fg='white',
+                                    background='#0BE462')
         self.btnBorrar = tk.Button(self.ContainerBtn,text="r",
-                                      font=(ICONOS1,20,''),
-                                      width=5,
-                                      fg='white',
-                                      background='#FF7373')
+                                    font=(ICONOS1,20,''),
+                                    width=5,
+                                    fg='white',
+                                    background='#FF7373')
         self.lblResultado = tk.Label(text=MENSAJE_EMPTY,
-                                     font=(FONT,12,'bold'),
-                                     fg='gray')
+                                    font=(FONT,12,'bold'),
+                                    fg='gray')
         
         self.lblInstruccion.pack(pady=5)
         self.lblMensaje.pack(pady=5,fill='x')
