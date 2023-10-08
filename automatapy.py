@@ -15,7 +15,7 @@ def isValidSql(str):
     #ATRIBVAL = f'({ATRIB}|{VALUE})'
     ATRIBVAL =  f'((\s*NOT\s+)*({ATRIB}|{VALUE}))'
 
-    RegEx = f'SELECT\s+(\*|{ATRIBVAL}(\s*\,\s*{ATRIBVAL})*)'
+    RegEx = f'\s*SELECT\s+(\*|{ATRIBVAL}(\s*\,\s*{ATRIBVAL})*)'
     RegEx += f'\s+FROM\s+{TABLE}(\s*,\s*{TABLE})*\s*'
     RegEx += f'(\s+WHERE\s+(NOT\s+)*{ATRIBVAL}(\s*{OP}\s*{ATRIBVAL})*)?\s*'
 
