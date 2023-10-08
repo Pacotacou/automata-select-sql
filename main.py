@@ -42,7 +42,7 @@ class App(tk.Frame):
                             
 root = tk.Tk()
 root.title('AUTOMATA-SELECT-SQL')
-
+root.resizable(False,False)
 myapp = App(root)
 myapp.mainloop()
 
