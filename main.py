@@ -7,6 +7,9 @@ MENSAJE_LABEL+='-No se contemplan RELACIONES AVANZADAS (JOIN)\n'
 MENSAJE_LABEL+='-No se contemplan operaciones con PARÉNTESIS'
 
 FONT = "Verdana"
+INPUT_FONT="Roman Regular"
+ICONOS1 = "Webdings"
+ICONOS2 = "Wingdings 2"
 
 class App(tk.Frame):
     def __init__(self, master):
@@ -17,17 +20,18 @@ class App(tk.Frame):
         self.lblMensaje = tk.Label(text=MENSAJE_LABEL,justify='left',
                                    font=(FONT,8,''),
                                    fg='gray')
-        self.txtConsultaSQL = tk.Text(height=7,width=40,
-                                      font=(FONT,12,''))
+        self.txtConsultaSQL = tk.Text(height=7,width=50,
+                                      font=(INPUT_FONT,10,'bold'),
+                                      fg='black')
         self.ContainerBtn = tk.Frame(self)
-        self.btnComprobar = tk.Button(self.ContainerBtn,text="VERIFICAR",
-                                      font=(FONT,14,''),
-                                      width=15,
-                                      fg='black')
-        self.btnBorrar = tk.Button(self.ContainerBtn,text="BORRAR",
-                                      font=(FONT,14,''),
-                                      width=15,
-                                      fg='black')
+        self.btnComprobar = tk.Button(self.ContainerBtn,text="8",
+                                      font=(ICONOS1,20,''),
+                                      width=5,
+                                      fg='green')
+        self.btnBorrar = tk.Button(self.ContainerBtn,text="r",
+                                      font=(ICONOS1,20,''),
+                                      width=5,
+                                      fg='red')
         self.lblResultado = tk.Label(text="(resultado...)",
                                      font=(FONT,12,'bold'),
                                      fg='gray')
@@ -36,8 +40,8 @@ class App(tk.Frame):
         self.lblMensaje.pack(pady=5,fill='x')
         self.txtConsultaSQL.pack(padx=20,fill='both')
         self.ContainerBtn.pack(pady=10,fill='x')
-        self.btnComprobar.grid(row=0, column=0, padx=4, pady=4, sticky='w')
-        self.btnBorrar.grid(row=0, column=1, padx=4, pady=4, sticky='e')
+        self.btnComprobar.grid(row=0, column=0, padx=20, pady=10, sticky='e')
+        self.btnBorrar.grid(row=0, column=1, padx=20, pady=10, sticky='w')
         self.lblResultado.pack(pady=5)
         self.pack()
 
