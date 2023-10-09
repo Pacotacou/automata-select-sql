@@ -19,7 +19,7 @@ def isValidSql(str):
     TABLE = f'({RES}([A-Z](\_?([A-Z]|\d))*))'
     ATRIB = f'(({TABLE}(\.{TABLE})?))'
     VALUE = '((\d+(\.\d+)?)|(\'.*\'))'
-    OP = '(\+|\-|\*|\/|\%|(\sAND\s)|(\sOR\s)|(\<\=?)|(\>\=?)|(\=\=)|(\!\=)|(\sLIKE\s))'
+    OP = '(\+|\-|\*|\/|\%|(\sAND\s)|(\sOR\s)|(\<\=?)|(\>\=?)|(\=\=)|(\<\>)|(\sLIKE\s))'
 
     #Atributo o Valor, puede ir con cero, uno o varios NOT al principio
     ATRIBVAL =  f'((\s*NOT\s+)*({ATRIB}|{VALUE}))'
