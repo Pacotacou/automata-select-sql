@@ -67,7 +67,7 @@ class App(tk.Frame):
                                     font=(FONT,12,'bold'),
                                     justify='center',
                                     width=50)
-        self.txtAnalisis = tk.Text(width=50,height=10,state='disabled')
+        self.txtAnalisis = tk.Text(width=50,height=15,state='disabled')
         
         #COLOCACIÓN DE LOS WIDGETS
         self.lblInstruccion.pack(pady=5)
@@ -90,7 +90,9 @@ class App(tk.Frame):
     #FUNCIONES
     def btnBorrarClic(self,event):
         self.txtConsultaSQL.delete("1.0","end")
+        self.txtAnalisis.config(state='normal')
         self.txtAnalisis.delete("1.0","end")
+        self.txtAnalisis.config(state='disabled')
         self.lblResultado.config(text=MENSAJE_EMPTY,
                                      font=(FONT,12,'bold'),
                                      fg='gray')

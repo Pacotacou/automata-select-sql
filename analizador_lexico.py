@@ -1,50 +1,77 @@
 import ply.lex as lex
+from ply.lex import TOKEN
 from tabulate import tabulate
 
-BlackList = ['WHERE','FROM','SELECT','JOIN',
-                 'INNER','FULL','AND','OR','NOT',
+BlackList = ['JOIN','INNER','FULL','NOT',
                  'LIKE','DELETE','DROP','DELETE',
                  'CREATE','UPDATE','ALTER','IN',
-                 'BETWEEN','IF','WHILE']
-    
-    #String de negación para las palabras reservadas de SQL
-BlackString = "("+"\b)|(".join(BlackList)+"\b)"
+                 'BETWEEN','IF','WHILE','FOR']
 
-    #Expresión regular con las palabras reservadas SQL
-RES = f'(?!{BlackString})'
+RES = r"(\b"+r"\b)|(\b".join(BlackList)+r"\b)"
 
 token_list = []
 
 tokens = (
     'SELECT',
-    'ASTERISK',
     'FROM',
     'WHERE',
+    'RESERVED',
     'TABLE',
     'ATTRIBUTE',
     'OPERATOR',
     'SEPARATOR',
     'NUMBER',
     'STRING'
-    
 )
 
-TABLE = fr'{RES}([A-Z](_?([A-Z0-9]))*)'
+TABLE = fr'([A-Z](_?([A-Z0-9]))*)'
 
+@TOKEN(r'\bSELECT\b')
+def t_SELECT(t):
+    return t
 
-t_ASTERISK = r'\b\*\b'
-t_FROM = r'\bFROM\b'
-t_WHERE = r'\bWHERE\b'
-t_TABLE = fr'({TABLE})'
-t_ATTRIBUTE = fr'{TABLE}(\.{TABLE})?'
-t_OPERATOR = r'(\+|\-|\*|\/|\%|(\sAND\s)|(\sOR\s)|(\<\=?)|(\>\=?)|(\=\=)|(\=)|(\>\<)|(\sLIKE\s))'
-t_SEPARATOR = r','
-t_NUMBER = r'(\d+(\.\d+)?)'
-t_STRING = r"'.*?'"
-t_SELECT = r'\bSELECT\b'
+@TOKEN(r'\bFROM\b')
+def t_FROM(t):
+    return t
+
+@TOKEN(r'\bWHERE\b')
+def t_WHERE(t):
+    return t
+
+@TOKEN(RES)
+def t_RESERVED(t):
+    return t
+
+@TOKEN(fr'{TABLE}\.{TABLE}')
+def t_ATTRIBUTE(t):
+    return t
+
+@TOKEN(TABLE)
+def t_TABLE(t):
+    return t
+
+@TOKEN(r'(\+|\-|\*|\/|\%|(\sAND\s)|(\sOR\s)|(\<\=?)|(\>\=?)|(\=\=)|(\=)|(\>\<)|(\sLIKE\s))')
+def t_OPERATOR(t):
+    return t
+
+@TOKEN(r',')
+def t_SEPARATOR(t):
+    return t
+
+@TOKEN(r'\d+(\.\d+)?')
+def t_NUMBER(t):
+    return t
+
+@TOKEN(r"'.*?'")
+def t_STRING(t):
+    return t
+
+def t_newline(t):
+    r'\n+'
+    t.lexer.lineno += len(t.value)
 
 def t_error(t):
-    if t.value[0] != " ":
+    if not t.value[0] in ['\n',' ']:
         token_list.append(('INVALID',t.value[0],t.lineno,t.lexpos))
     t.lexer.skip(1)
 
