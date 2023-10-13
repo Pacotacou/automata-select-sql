@@ -2,13 +2,6 @@ import ply.lex as lex
 from ply.lex import TOKEN
 from tabulate import tabulate
 
-BlackList = ['JOIN','INNER','FULL','NOT',
-                 'LIKE','DELETE','DROP','DELETE',
-                 'CREATE','UPDATE','ALTER','IN',
-                 'BETWEEN','IF','WHILE','FOR']
-
-RES = r"(\b"+r"\b)|(\b".join(BlackList)+r"\b)"
-
 token_list = []
 
 tokens = (
@@ -23,6 +16,13 @@ tokens = (
     'NUMBER',
     'STRING'
 )
+
+BlackList = ['JOIN','INNER','FULL','NOT',
+                 'LIKE','DELETE','DROP','DELETE',
+                 'CREATE','UPDATE','ALTER','IN',
+                 'BETWEEN','IF','WHILE','FOR']
+
+RES = r"(\b"+r"\b)|(\b".join(BlackList)+r"\b)"
 
 TABLE = fr'([A-Z](_?([A-Z0-9]))*)'
 
