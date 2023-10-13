@@ -79,6 +79,7 @@ lexer = lex.lex()
 
 def tokenize(data):
     token_list.clear()
+    lexer.lineno = 0
     lexer.input(data)
     while True:
         tok = lexer.token()
