@@ -1,7 +1,7 @@
 import tkinter as tk
 from automatapy import isValidSql
 import re
-
+from analizador_lexico import tokenize
 MENSAJE_EXCEPCIONES ='-La sentencia FROM es obligatoria\n'
 MENSAJE_EXCEPCIONES+='-No se contemplan SUBCONSULTAS\n'
 MENSAJE_EXCEPCIONES+='-No se contemplan RELACIONES AVANZADAS (JOIN)\n'
@@ -12,6 +12,8 @@ MENSAJE_EXCEPCIONES+="-No se permiten nombres de columna"
 MENSAJE_EMPTY="INGRESE SU CONSULTA SQL"
 MENSAJE_VALIDO="LA CONSULTA SQL ES VÁLIDA"
 MENSAJE_INVALIDO="LA CONSULTA SQL NO ES VÁLIDA"
+
+MENSAJE_ANALISIS = "Análisis Léxico"
 
 BTN_BORRAR = 'BORRAR CONSULTA'
 BTN_COMPROBAR = 'COMPROBAR CONSULTA'
@@ -61,6 +63,11 @@ class App(tk.Frame):
         self.lblResultado = tk.Label(text=MENSAJE_EMPTY,
                                     font=(FONT,12,'bold'),
                                     fg='gray')
+        self.lblAnalisis = tk.Label(text=MENSAJE_ANALISIS,
+                                    font=(FONT,12,'bold'),
+                                    justify='center',
+                                    width=50)
+        self.txtAnalisis = tk.Text(width=50,height=10,state='disabled')
         
         #COLOCACIÓN DE LOS WIDGETS
         self.lblInstruccion.pack(pady=5)
@@ -72,6 +79,8 @@ class App(tk.Frame):
         self.btnComprobar.grid(row=1, column=0, padx=20, sticky='e')
         self.btnBorrar.grid(row=1, column=1, padx=20, sticky='w')
         self.lblResultado.pack(pady=5)
+        self.lblAnalisis.pack(pady=2, fill='x')
+        self.txtAnalisis.pack(fill='both',padx=20)
         self.pack()
 
         #EVENTOS
@@ -81,6 +90,7 @@ class App(tk.Frame):
     #FUNCIONES
     def btnBorrarClic(self,event):
         self.txtConsultaSQL.delete("1.0","end")
+        self.txtAnalisis.delete("1.0","end")
         self.lblResultado.config(text=MENSAJE_EMPTY,
                                      font=(FONT,12,'bold'),
                                      fg='gray')
@@ -89,6 +99,11 @@ class App(tk.Frame):
         cadena = self.txtConsultaSQL.get("1.0","end-1c").upper()
         isValid = isValidSql(cadena+" ")
         isEmpty = re.fullmatch('\s*',cadena+" ")
+
+        self.txtAnalisis.config(state='normal')
+        self.txtAnalisis.delete("1.0","end")
+        self.txtAnalisis.insert("1.0",tokenize(cadena))
+        self.txtAnalisis.config(state='disabled')
         
         if isValid:
             self.lblResultado.config(text=MENSAJE_VALIDO,
