@@ -3,17 +3,17 @@ import re
 #Función para verificar consultas SQL
 def isValidSql(str):
     #Lista de palabras reservadas de SQL
-    BlackList = ['WHERE','FROM','SELECT','JOIN',
+    ListaReservada = ['WHERE','FROM','SELECT','JOIN',
                  'INNER','FULL','AND','OR','NOT',
                  'LIKE','DELETE','DROP','DELETE',
                  'CREATE','UPDATE','ALTER','IN',
                  'BETWEEN','IF','WHILE','FOR']
     
     #String de negación para las palabras reservadas de SQL
-    BlackString = "("+"\W)|(".join(BlackList)+"\W)"
+    StringReservado = "("+"\W)|(".join(ListaReservada)+"\W)"
 
     #Expresión regular con las palabras reservadas SQL
-    RES = f'(?!{BlackString})'
+    RES = f'(?!{StringReservado})'
 
     #Variables
     TABLE = f'({RES}([A-Z](\_?([A-Z]|\d))*))'
