@@ -12,7 +12,7 @@ tokens = (
     'TABLE',
     'ATTRIBUTE',
     'OPERATOR',
-    'SEPARATOR',
+    'COMA',
     'NUMBER',
     'STRING'
 )
@@ -55,7 +55,7 @@ def t_OPERATOR(t):
     return t
 
 @TOKEN(r',')
-def t_SEPARATOR(t):
+def t_COMA(t):
     return t
 
 @TOKEN(r'\d+(\.\d+)?')
@@ -80,6 +80,7 @@ lexer = lex.lex()
 def tokenize(data):
     token_list.clear()
     lexer.lineno = 0
+    lexer.lexpos = 0
     lexer.input(data)
     while True:
         tok = lexer.token()
